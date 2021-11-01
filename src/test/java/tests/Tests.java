@@ -6,9 +6,11 @@ import static org.junit.Assert.assertEquals;
 
 public class Tests extends BaseTest{
 
+    private static final String TITLE = "Wikipedia, the free encyclopedia";
+
     @Test
     public void checkTitleTest() {
-        assertEquals("Wikipedia, the free encyclopedia", getHomePage().getTitle());
+        assertEquals(TITLE, getHomePage().getTitle());
     }
 
 }
