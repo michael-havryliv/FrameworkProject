@@ -14,10 +14,6 @@ public class SiteResultsPage extends BasePage{
         super(driver);
     }
 
-    public String getSiteTitle() {
-        return driver.getTitle();
-    }
-
     public List<WebElement> getProductTitles() {
         return driver.findElements(By.xpath(PRODUCT_TITLES));
     }
