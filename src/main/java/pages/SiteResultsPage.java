@@ -10,6 +10,7 @@ public class SiteResultsPage extends BasePage{
 
     private String FOXTROT_PRODUCT_TITLES = "//div[@class='card__body']/a";
     private String EPICENTER_PRODUCT_TITLES = "//em-product-card//b";
+    private String HOZSKLAD_PRODUCT_TITLES = "//div[contains(@id,'product')]//span[@class='product_card__title']/a";
 
     public SiteResultsPage(WebDriver driver) {
         super(driver);
@@ -22,4 +23,9 @@ public class SiteResultsPage extends BasePage{
     public List<WebElement> getEpicenterProductTitles() {
         return driver.findElements(By.xpath(EPICENTER_PRODUCT_TITLES));
     }
+
+    public List<WebElement> getHozskladProductTitles() {
+        return driver.findElements(By.xpath(HOZSKLAD_PRODUCT_TITLES));
+    }
+
 }
