@@ -1,44 +1,45 @@
 package tests;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.GoogleHomePage;
 import pages.GoogleResultsPage;
-import pages.HomePage;
 import pages.SiteResultsPage;
 
 public class BaseTest {
 
-    private WebDriver driver;
+    private static WebDriver driver;
     private static final String URL = "https://www.google.com/";
 
-    @BeforeClass
-    public static void profileSetUp(){
+    @BeforeAll
+    static void profileSetUp(){
         System.setProperty("webdriver.chrome.driver", "src\\main\\resources\\chromedriver95.exe");
     }
 
-    @Before
+    @BeforeEach
     public void testsSetUp(){
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get(URL);
     }
 
-    @After
+    @AfterEach
     public void tearDown(){
+        driver.close();
+    }
+
+    @AfterAll
+    static void closeAll(){
         driver.quit();
     }
 
 
     public WebDriver getDriver() {
         return driver;
-    }
-
-    public HomePage getHomePage() {
-        return new HomePage(getDriver());
     }
 
     public GoogleHomePage getGoogleHomePage(){

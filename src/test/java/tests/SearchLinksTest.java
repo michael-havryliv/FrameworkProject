@@ -1,8 +1,9 @@
 package tests;
 
 import java.util.logging.Logger;
-import org.junit.Assert;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebElement;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -44,7 +45,7 @@ public class SearchLinksTest extends BaseTest{
             }else{
                 FileWriter nFile = new FileWriter("src\\test\\resources\\file1.txt");
                 for (WebElement webElement : getSiteResultsPage().getHozskladProductTitles()){
-                    Assert.assertTrue("Site does not have searched product.",webElement.getText().contains(HOZSKLAD_EXPECTED_PRODUCT));
+                    Assertions.assertTrue(webElement.getText().contains(HOZSKLAD_EXPECTED_PRODUCT),"Site does not have searched product.");
                     nFile.write(webElement.getAttribute("href")+"\n");
                 }
                 logger.info("Links saved to file. End of test.");
@@ -52,6 +53,6 @@ public class SearchLinksTest extends BaseTest{
                 break;
             }
         }
-        Assert.assertTrue("Page was not found. End of test.",pageIsFound);
+        Assertions.assertTrue(pageIsFound,"Page was not found. End of test.");
     }
 }
