@@ -8,13 +8,18 @@ import java.util.List;
 
 public class SiteResultsPage extends BasePage{
 
-    private String PRODUCT_TITLES = "//div[@class='card__body']/a";
+    private String FOXTROT_PRODUCT_TITLES = "//div[@class='card__body']/a";
+    private String EPICENTER_PRODUCT_TITLES = "//em-product-card//b";
 
     public SiteResultsPage(WebDriver driver) {
         super(driver);
     }
 
-    public List<WebElement> getProductTitles() {
-        return driver.findElements(By.xpath(PRODUCT_TITLES));
+    public List<WebElement> getFoxtrotProductTitles() {
+        return driver.findElements(By.xpath(FOXTROT_PRODUCT_TITLES));
+    }
+
+    public List<WebElement> getEpicenterProductTitles() {
+        return driver.findElements(By.xpath(EPICENTER_PRODUCT_TITLES));
     }
 }
