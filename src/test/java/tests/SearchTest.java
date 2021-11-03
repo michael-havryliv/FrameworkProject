@@ -17,10 +17,9 @@ public class SearchTest extends BaseTest{
     private final String SEARCHED_KEYWORD = "чайник";
     private final String FOXTROT_SITE = "foxtrot";
     private final String EPICENTER_SITE = "epicentrk";
-    private final String HOZSKLAD_SITE = "hozsklad";
     private final String FOXTROT_EXPECTED_PRODUCT = "Електрочайник";
     private final String EPICENTER_EXPECTED_PRODUCT = "Чайник";
-    private final String HOZSKLAD_EXPECTED_PRODUCT = "ЧАЙНИК";
+
 
     @Test
     public void checkIfFoxtrotSiteContainsExpectedProducts(){
