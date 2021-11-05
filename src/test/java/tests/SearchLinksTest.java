@@ -27,7 +27,7 @@ public class SearchLinksTest extends BaseTest{
         logger.info("Google home page loaded");
         boolean pageIsFound = false;
         int currentPage = 1;
-        while(true){
+        while(currentPage < 8){
             logger.info("Current page: " + currentPage);
             int currentSite = 0;
             for (WebElement webElement : getGoogleResultsPage().getResultUrls()) {

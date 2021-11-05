@@ -5,8 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebElement;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.logging.Logger;
 
 public class SearchTest extends BaseTest{

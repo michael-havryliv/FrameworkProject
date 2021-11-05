@@ -13,10 +13,6 @@ public class BasePage {
         this.driver = driver;
     }
 
-    /*public void implicitWait(long timeToWait) {
-        driver.manage().timeouts().implicitlyWait(timeToWait, TimeUnit.SECONDS);
-    }*/
-
     public void waitForPageLoadComplete(long timeToWait) {
         new WebDriverWait(driver, Duration.ofSeconds(timeToWait)).until(
                 webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));

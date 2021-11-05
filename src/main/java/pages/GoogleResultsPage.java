@@ -16,8 +16,7 @@ public class GoogleResultsPage extends BasePage {
 
     private static final String URLS = "//div[@class='TbwUpd NJjxre']/cite";
     private static final String LINKS_TO_SITES = "//div//a/h3";
-    private static final String LINKS_TO_SEARCH_PAGES = "//*[@id=\"xjs\"]//a/span";
-    private static final String NEW_LINKS_TO_SEARCH_PAGES = "//*[@id=\"xjs\"]//a[@class='fl']";
+    private static final String LINKS_TO_SEARCH_PAGES = "//*[@id=\"xjs\"]//a[@class='fl']";
 
     public GoogleResultsPage(WebDriver driver) {
         super(driver);
@@ -33,7 +32,7 @@ public class GoogleResultsPage extends BasePage {
 
     public void goToNextPage(int current_page) {
         boolean goToNextPage = false;
-        for (WebElement webElement : driver.findElements(By.xpath(NEW_LINKS_TO_SEARCH_PAGES))){
+        for (WebElement webElement : driver.findElements(By.xpath(LINKS_TO_SEARCH_PAGES))){
             if(Objects.equals(webElement.getText(), Integer.toString(current_page + 1))){
                 webElement.click();
                 logger.info("Going to next page");

@@ -6,7 +6,7 @@ import org.openqa.selenium.Keys;
 
 public class GoogleHomePage extends BasePage {
 
-    private final String GOOGLE_INPUT_FIELD = "//input[@title]";
+    private static final String GOOGLE_INPUT_FIELD = "//input[@title]";
 
     public GoogleHomePage(WebDriver driver) {
         super(driver);

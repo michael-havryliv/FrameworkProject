@@ -8,9 +8,9 @@ import java.util.List;
 
 public class SiteResultsPage extends BasePage{
 
-    private String FOXTROT_PRODUCT_TITLES = "//div[@class='card__body']/a";
-    private String EPICENTER_PRODUCT_TITLES = "//em-product-card//b";
-    private String HOZSKLAD_PRODUCT_TITLES = "//div[contains(@id,'product')]//span[@class='product_card__title']/a";
+    private static final String FOXTROT_PRODUCT_TITLES = "//div[@class='card__body']/a";
+    private static final String EPICENTER_PRODUCT_TITLES = "//em-product-card//b";
+    private static final String HOZSKLAD_PRODUCT_TITLES = "//div[contains(@id,'product')]//span[@class='product_card__title']/a";
 
     public SiteResultsPage(WebDriver driver) {
         super(driver);
