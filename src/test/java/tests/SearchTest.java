@@ -1,6 +1,7 @@
 package tests;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebElement;
 
@@ -14,20 +15,21 @@ public class SearchTest extends BaseTest{
 
     private final int DEFAULT_TIME_TO_WAIT = 30;
 
-    private final String SEARCHED_KEYWORD = "чайник";
-    private final String FOXTROT_SITE = "foxtrot";
-    private final String EPICENTER_SITE = "epicentrk";
-    private final String FOXTROT_EXPECTED_PRODUCT = "Електрочайник";
-    private final String EPICENTER_EXPECTED_PRODUCT = "Чайник";
+    private static final String SEARCHED_KEYWORD = "чайник";
+    private static final String FOXTROT_SITE = "foxtrot";
+    private static final String EPICENTER_SITE = "epicentrk";
+    private static final String FOXTROT_EXPECTED_PRODUCT = "Електрочайник";
+    private static final String EPICENTER_EXPECTED_PRODUCT = "Чайник";
 
 
     @Test
+    @DisplayName("Search Foxtrot site, and check if it contains expected products")
     public void checkIfFoxtrotSiteContainsExpectedProducts(){
         getGoogleHomePage().inputSearchedKeywordInInputField(SEARCHED_KEYWORD);
         getGoogleResultsPage().waitForPageLoadComplete(DEFAULT_TIME_TO_WAIT);
         logger.info("Google home page loaded");
         boolean pageIsFound = false;
-        int currentPage = 0;
+        int currentPage = 1;
         while(currentPage < 6){
             logger.info("Current page: " + currentPage);
             int currentSite = 0;
@@ -54,12 +56,13 @@ public class SearchTest extends BaseTest{
     }
 
     @Test
+    @DisplayName("Search Epicenter site, and check if it contains expected products")
     public void checkIfEpicenterSiteContainsExpectedProducts(){
         getGoogleHomePage().inputSearchedKeywordInInputField(SEARCHED_KEYWORD);
         getGoogleResultsPage().waitForPageLoadComplete(DEFAULT_TIME_TO_WAIT);
         logger.info("Google home page loaded");
         boolean pageIsFound = false;
-        int currentPage = 0;
+        int currentPage = 1;
         while(currentPage < 6){
             logger.info("Current page: " + currentPage);
             int currentSite = 0;

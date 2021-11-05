@@ -5,14 +5,19 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.logging.Logger;
 
 import static org.openqa.selenium.By.xpath;
 
 public class GoogleResultsPage extends BasePage {
 
-    private String URLS = "//div[@class='TbwUpd NJjxre']/cite";
-    private String LINKS_TO_SITES = "//div//a/h3";
-    private String LINKS_TO_SEARCH_PAGES = "//*[@id=\"xjs\"]//a/span";
+    Logger logger = Logger.getLogger(GoogleResultsPage.class.getName());
+
+    private static final String URLS = "//div[@class='TbwUpd NJjxre']/cite";
+    private static final String LINKS_TO_SITES = "//div//a/h3";
+    private static final String LINKS_TO_SEARCH_PAGES = "//*[@id=\"xjs\"]//a/span";
+    private static final String NEW_LINKS_TO_SEARCH_PAGES = "//*[@id=\"xjs\"]//a[@class='fl']";
 
     public GoogleResultsPage(WebDriver driver) {
         super(driver);
@@ -27,6 +32,15 @@ public class GoogleResultsPage extends BasePage {
     }
 
     public void goToNextPage(int current_page) {
-        driver.findElements(By.xpath(LINKS_TO_SEARCH_PAGES)).get(current_page).click();
+        boolean goToNextPage = false;
+        for (WebElement webElement : driver.findElements(By.xpath(NEW_LINKS_TO_SEARCH_PAGES))){
+            if(Objects.equals(webElement.getText(), Integer.toString(current_page + 1))){
+                webElement.click();
+                logger.info("Going to next page");
+                goToNextPage = true;
+                break;
+            }
+        }
+        if(!goToNextPage) logger.info("Cannot go to next page");
     }
 }

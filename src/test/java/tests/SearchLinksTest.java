@@ -3,6 +3,7 @@ package tests;
 import java.util.logging.Logger;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebElement;
 import java.io.FileWriter;
@@ -12,20 +13,21 @@ public class SearchLinksTest extends BaseTest{
 
     Logger logger = Logger.getLogger(SearchLinksTest.class.getName());
 
-    private final int DEFAULT_TIME_TO_WAIT = 30;
+    private static final int DEFAULT_TIME_TO_WAIT = 30;
 
-    private final String SEARCHED_KEYWORD = "чайник";
-    private final String HOZSKLAD_SITE = "hozsklad";
-    private final String HOZSKLAD_EXPECTED_PRODUCT = "ЧАЙНИК";
+    private static  final String SEARCHED_KEYWORD = "чайник";
+    private static  final String HOZSKLAD_SITE = "hozsklad";
+    private static  final String HOZSKLAD_EXPECTED_PRODUCT = "ЧАЙНИК";
 
     @Test
+    @DisplayName("Search Hozsklad site, check if it contains expected products and save links")
     public void checkIfHozskladSiteContainsExpectedProducts() throws IOException {
         getGoogleHomePage().inputSearchedKeywordInInputField(SEARCHED_KEYWORD);
         getGoogleResultsPage().waitForPageLoadComplete(DEFAULT_TIME_TO_WAIT);
         logger.info("Google home page loaded");
         boolean pageIsFound = false;
-        int currentPage = 0;
-        while(currentPage < 8){
+        int currentPage = 1;
+        while(true){
             logger.info("Current page: " + currentPage);
             int currentSite = 0;
             for (WebElement webElement : getGoogleResultsPage().getResultUrls()) {
