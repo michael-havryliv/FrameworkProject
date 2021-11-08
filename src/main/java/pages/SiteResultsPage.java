@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,14 +17,17 @@ public class SiteResultsPage extends BasePage{
         super(driver);
     }
 
+    @Step(value = "get foxtrot product titles")
     public List<WebElement> getFoxtrotProductTitles() {
         return driver.findElements(By.xpath(FOXTROT_PRODUCT_TITLES));
     }
 
+    @Step(value = "get epicenter product titles")
     public List<WebElement> getEpicenterProductTitles() {
         return driver.findElements(By.xpath(EPICENTER_PRODUCT_TITLES));
     }
 
+    @Step(value = "get hozsklad product titles")
     public List<WebElement> getHozskladProductTitles() {
         return driver.findElements(By.xpath(HOZSKLAD_PRODUCT_TITLES));
     }

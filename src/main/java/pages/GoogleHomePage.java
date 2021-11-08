@@ -1,8 +1,10 @@
 package pages;
 
+import io.qameta.allure.Attachment;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.Keys;
+import io.qameta.allure.Step;
 
 public class GoogleHomePage extends BasePage {
 
@@ -12,6 +14,8 @@ public class GoogleHomePage extends BasePage {
         super(driver);
     }
 
+    @Step(value = "input searched keyword in input field")
+    @Attachment(value = "Page screenshot", type = "image/png")
     public void inputSearchedKeywordInInputField(String searchedKeyword) {
         driver.findElement(By.xpath(GOOGLE_INPUT_FIELD)).sendKeys(searchedKeyword, Keys.ENTER);
     }

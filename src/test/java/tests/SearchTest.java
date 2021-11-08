@@ -14,7 +14,7 @@ public class SearchTest extends BaseTest{
     private final int DEFAULT_TIME_TO_WAIT = 30;
 
     private static final String SEARCHED_KEYWORD = "чайник";
-    private static final String FOXTROT_SITE = "foxtrot";
+    private static final String FOXTROT_SITE = "foxtrot1111111111111111111";
     private static final String EPICENTER_SITE = "epicentrk";
     private static final String FOXTROT_EXPECTED_PRODUCT = "Електрочайник";
     private static final String EPICENTER_EXPECTED_PRODUCT = "Чайник";
