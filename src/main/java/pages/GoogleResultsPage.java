@@ -1,11 +1,11 @@
 package pages;
 
+import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
+import java.io.ByteArrayInputStream;
 import java.util.List;
 import java.util.Objects;
 import java.util.logging.Logger;
@@ -29,13 +29,12 @@ public class GoogleResultsPage extends BasePage {
         return driver.findElements(xpath(URLS));
     }
 
-    @Attachment(value = "Page screenshot", type = "image/png")
-    @Step(value = "click in link of current site")
+    @Step(value = "click on link of current site")
     public void clickOnLinkOfCurrentSite(int current_site) {
+        Allure.addAttachment("Link of current site", new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
         driver.findElements(xpath(LINKS_TO_SITES)).get(current_site).click();
     }
 
-    @Attachment(value = "Page screenshot", type = "image/png")
     @Step(value = "go to next page")
     public void goToNextPage(int current_page) {
         boolean goToNextPage = false;

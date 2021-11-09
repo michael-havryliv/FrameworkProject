@@ -1,10 +1,10 @@
 package pages;
 
+import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
+import java.io.ByteArrayInputStream;
 import java.util.List;
 
 public class SiteResultsPage extends BasePage{
@@ -19,17 +19,19 @@ public class SiteResultsPage extends BasePage{
 
     @Step(value = "get foxtrot product titles")
     public List<WebElement> getFoxtrotProductTitles() {
+        Allure.addAttachment("Searched site", new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
         return driver.findElements(By.xpath(FOXTROT_PRODUCT_TITLES));
     }
 
     @Step(value = "get epicenter product titles")
     public List<WebElement> getEpicenterProductTitles() {
+        Allure.addAttachment("Searched site", new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
         return driver.findElements(By.xpath(EPICENTER_PRODUCT_TITLES));
     }
 
     @Step(value = "get hozsklad product titles")
     public List<WebElement> getHozskladProductTitles() {
+        Allure.addAttachment("Searched site", new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
         return driver.findElements(By.xpath(HOZSKLAD_PRODUCT_TITLES));
     }
-
 }
