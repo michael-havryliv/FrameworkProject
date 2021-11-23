@@ -6,9 +6,12 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 
 import java.io.ByteArrayInputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.openqa.selenium.By.xpath;
 
@@ -24,8 +27,8 @@ public class GoogleResultsPage extends BasePage {
         super(driver);
     }
 
-    @Step(value = "get urls")
-    public List<WebElement> getResultUrls() {
+    @Step(value = "get urls as web elements")
+    public List<WebElement> getSiteWebElementUrls() {
         return driver.findElements(xpath(URLS));
     }
 
@@ -48,4 +51,28 @@ public class GoogleResultsPage extends BasePage {
         }
         if(!goToNextPage) logger.info("Cannot go to next page");
     }
+
+    @Step(value = "get site urls as text")
+    public List<String> getSiteUrls(){
+        List<String> result = new ArrayList<>();
+        for(WebElement url : driver.findElements(xpath(URLS))){
+            result.add(url.getText());
+        }
+        return result;
+    }
+
+
+    public List<String> getSiteDomainNames(List<String> siteUrls) {
+        String regex = "://(?:\\w{2,3}\\W)?(\\w+)";
+        List<String> result = new ArrayList<>();
+        for (String url : siteUrls){
+            Pattern pt = Pattern.compile(regex);
+            Matcher mt = pt.matcher(url);
+            if(mt.find()){
+                result.add(mt.group(1));
+            }
+        }
+        return result;
+    }
+
 }

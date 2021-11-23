@@ -5,6 +5,7 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.*;
 
 import java.io.ByteArrayInputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SiteResultsPage extends BasePage{
@@ -34,4 +35,5 @@ public class SiteResultsPage extends BasePage{
         Allure.addAttachment("Searched site", new ByteArrayInputStream(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES)));
         return driver.findElements(By.xpath(HOZSKLAD_PRODUCT_TITLES));
     }
+
 }

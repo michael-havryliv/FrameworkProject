@@ -30,7 +30,7 @@ public class SearchLinksTest extends BaseTest{
         while(currentPage < 8){
             logger.info("Current page: " + currentPage);
             int currentSite = 0;
-            for (WebElement webElement : getGoogleResultsPage().getResultUrls()) {
+            for (WebElement webElement : getGoogleResultsPage().getSiteWebElementUrls()) {
                 if (webElement.getText().contains(HOZSKLAD_SITE)) {
                     getGoogleResultsPage().clickOnLinkOfCurrentSite(currentSite);
                     getSiteResultsPage().waitForPageLoadComplete(DEFAULT_TIME_TO_WAIT);

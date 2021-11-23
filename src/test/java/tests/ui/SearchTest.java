@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 public class SearchTest extends BaseTest{
@@ -31,7 +32,7 @@ public class SearchTest extends BaseTest{
         while(currentPage < 6){
             logger.info("Current page: " + currentPage);
             int currentSite = 0;
-            for (WebElement webElement : getGoogleResultsPage().getResultUrls()) {
+            for (WebElement webElement : getGoogleResultsPage().getSiteWebElementUrls()) {
                 if (webElement.getText().contains(FOXTROT_SITE)) {
                     getGoogleResultsPage().clickOnLinkOfCurrentSite(currentSite);
                     getSiteResultsPage().waitForPageLoadComplete(DEFAULT_TIME_TO_WAIT);
@@ -64,7 +65,7 @@ public class SearchTest extends BaseTest{
         while(currentPage < 6){
             logger.info("Current page: " + currentPage);
             int currentSite = 0;
-            for (WebElement webElement : getGoogleResultsPage().getResultUrls()) {
+            for (WebElement webElement : getGoogleResultsPage().getSiteWebElementUrls()) {
                 if (webElement.getText().contains(EPICENTER_SITE)) {
                     getGoogleResultsPage().clickOnLinkOfCurrentSite(currentSite);
                     getSiteResultsPage().waitForPageLoadComplete(DEFAULT_TIME_TO_WAIT);
@@ -84,6 +85,17 @@ public class SearchTest extends BaseTest{
             Assertions.assertTrue(webElement.getText().contains(EPICENTER_EXPECTED_PRODUCT),"Site does not have searched product");
         }
         Assertions.assertTrue(pageIsFound,"Site was not found. End of test.");
+    }
+
+    @Test
+    public void searchSiteDomainNames(){
+        getGoogleHomePage().inputSearchedKeywordInInputField(SEARCHED_KEYWORD);
+        getGoogleResultsPage().waitForPageLoadComplete(DEFAULT_TIME_TO_WAIT);
+        logger.info("Google home page loaded");
+        List<String> siteUrls = getGoogleResultsPage().getSiteUrls();
+        for(String str : siteUrls) System.out.println(str);
+        List<String> siteDomainNames = getGoogleResultsPage().getSiteDomainNames(siteUrls);
+        for(String str : siteDomainNames) System.out.println(str);
     }
 
 }
