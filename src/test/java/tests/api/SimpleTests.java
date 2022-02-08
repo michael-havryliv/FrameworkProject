@@ -3,39 +3,49 @@ package tests.api;
 import config.EndPointsConfig;
 import config.EnvConfig;
 import io.restassured.RestAssured;
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.http.ContentType;
+import io.restassured.specification.RequestSpecification;
 import models.api.DataPOJO;
 import models.api.SmallUserPOJO;
 import models.api.UserPOJO;
 import models.api.UsersPOJO;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import specifications.Specifications;
-
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Assertions;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.hasItem;
 
 public class SimpleTests{
 
+    private static RequestSpecification spec;
+
+    @BeforeAll
+    public static void initSpec(){
+        spec = new RequestSpecBuilder()
+                .setContentType(ContentType.JSON)
+                .setBaseUri(EnvConfig.URL_API)
+                .build();
+    }
+
     @Test
     public void checkIfUsersHaveTheSameDomainTest(){
-        Specifications.installSpecs(Specifications.reqSpec(EnvConfig.URL_API),Specifications.resSpecOK200());
         UsersPOJO users = RestAssured.given()
+                .spec(spec)
                 .when().get(EndPointsConfig.getUsers)
-                .then().extract().as(UsersPOJO.class);
+                .then().statusCode(200).extract().as(UsersPOJO.class);
         List<String> emails = users.getData().stream().map(DataPOJO::getEmail).collect(Collectors.toList());
         emails.forEach(x -> Assertions.assertTrue(x.contains("reqres.in"),"Email domain is not as expected"));
     }
 
     @Test
     public void checkIfSingleUserHasExpectedParametersTest(){
-        Specifications.installSpecs(Specifications.reqSpec(EnvConfig.URL_API),Specifications.resSpecOK200());
         UserPOJO user = RestAssured.given()
+                .spec(spec)
                 .when().get(EndPointsConfig.singleUser)
-                .then().extract().as(UserPOJO.class);
+                .then().statusCode(200).extract().as(UserPOJO.class);
         Assertions.assertEquals(2, user.getData().getId(),"User ID is not as expected");
         Assertions.assertEquals("Janet", user.getData().getFirst_name(),"User First Name is not as expected");
         Assertions.assertEquals("Weaver", user.getData().getLast_name(),"User Last Name is not as expected");
@@ -44,37 +54,41 @@ public class SimpleTests{
 
     @Test
     public void checkThatUserIsNotFound(){
-        Specifications.installSpecs(Specifications.reqSpec(EnvConfig.URL_API),Specifications.resSpecNotFound404());
-        given().get(EndPointsConfig.singleUserNotFound);
+        given()
+                .spec(spec)
+                .get(EndPointsConfig.singleUserNotFound)
+                .then().statusCode(404).log().all();
     }
 
     @Test
     public void postTest(){
-        Specifications.installSpecs(Specifications.reqSpec(EnvConfig.URL_API),Specifications.resSpecCreated201());
         SmallUserPOJO user = new SmallUserPOJO();
         user.setName("morpheus");
         user.setJob("leader");
         given()
-                .body(user).when().post(EndPointsConfig.postUsers)
-                .then().log().all();
+                .spec(spec)
+                .body(user)
+                .when().post(EndPointsConfig.postUsers)
+                .then().statusCode(201).log().all();
     }
 
     @Test
     public void putTest(){
-        Specifications.installSpecs(Specifications.reqSpec(EnvConfig.URL_API),Specifications.resSpecOK200());
         SmallUserPOJO user = new SmallUserPOJO();
         user.setName("morpheus");
         user.setJob("leader");
         given()
-                .body(user).when().put(EndPointsConfig.postUsers)
-                .then().log().all();
+                .spec(spec)
+                .body(user)
+                .when().put(EndPointsConfig.postUsers)
+                .then().statusCode(200).log().all();
     }
 
     @Test
     public void deleteTest(){
-        Specifications.installSpecs(Specifications.reqSpec(EnvConfig.URL_API),Specifications.resSpecNoContent204());
         given()
+                .spec(spec)
                 .delete(EndPointsConfig.singleUser)
-                .then().log().all();
+                .then().statusCode(204).log().all();
     }
 }
